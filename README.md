@@ -26,7 +26,7 @@ Create an image with shot, lens, lighting, and style controls. The app combines 
 
 ## Request flow
 
-**Generate image** posts the scene and selected shot, camera, lighting, and look to `/api/generate`. The route validates these values, combines them into a prompt with `cinematicPrompt()` in `lib/prompt.ts`, and calls `bfl/flux-2-pro` through the Comfy SDK. The shot and camera options are prompt text; they do not simulate a lens. The server fetches the result and returns the image to the browser.
+**Generate image** posts the scene and selected shot, camera, lighting, and look to `/api/generate`. The route validates these values, combines them into a prompt with `cinematicPrompt()` in `lib/prompt.ts`, and calls `bfl/flux-2-pro` through the Comfy SDK. The server fetches the result and returns the image to the browser.
 
 This example uses Comfy Router's hosted model API. It does not submit a Comfy workflow.
 
