@@ -24,12 +24,11 @@ Create an image with shot, lens, lighting, and style controls. The app combines 
 
 `COMFY_API_KEY` stays in the local server. Do not rename it with a `NEXT_PUBLIC_` prefix or commit `.env.local`.
 
-## Follow the request
+## Request flow
 
-- [`components/app-runner.tsx`](components/app-runner.tsx) collects the controls and posts them to `/api/generate`.
-- [`lib/prompt.ts`](lib/prompt.ts) combines the scene and direction choices into plain prompt text. Camera and lens names guide the image model through language; they do not simulate a real optical camera.
-- [`app/api/generate/route.ts`](app/api/generate/route.ts) validates the request, configures the Comfy TypeScript SDK with the server key, and calls the `bfl/flux-2-pro` Router model. It streams the returned image back to the page.
-- Router calls a hosted model directly; this app does not submit a Comfy workflow graph. See Re-shoot for workflow execution.
+**Generate image** posts the scene and selected shot, camera, lighting, and look to `/api/generate`. The route validates these values, combines them into a prompt with `cinematicPrompt()` in `lib/prompt.ts`, and calls `bfl/flux-2-pro` through the Comfy SDK. The shot and camera options are prompt text; they do not simulate a lens. The server fetches the result and returns the image to the browser.
+
+This example uses Comfy Router's hosted model API. It does not submit a Comfy workflow.
 
 ## Make a change
 
