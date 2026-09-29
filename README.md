@@ -4,7 +4,7 @@ Build a short scene from simple cinematography controls, then call an image mode
 
 ## Run locally
 
-1. Create a [Comfy API key](https://docs.comfy.org/development/comfy-router/quickstart) for a workspace with Router access and credits.
+1. Install [Node.js 22.6 or newer](https://nodejs.org/) and create a [Comfy API key](https://docs.comfy.org/development/comfy-router/quickstart) for a workspace with Router access and credits.
 2. Clone and configure the app:
 
    ```sh
@@ -35,7 +35,7 @@ Build a short scene from simple cinematography controls, then call an image mode
 
 Add one option to a list in `lib/prompt.ts` and to its control in `components/app-runner.tsx`. The page preview shows the new words before generation, so you can see the effect of your edit without guessing what request was sent.
 
-To try another Router model, first check its request fields in the [model catalog](https://docs.comfy.org/development/comfy-router/schemas). Change the model ID and request body in `app/api/generate/route.ts` together; Router models can have different parameters and output shapes.
+To try another Router model, first check its request fields in the [model catalog](https://docs.comfy.org/development/comfy-router/schemas). Change the model ID and request body in `app/api/generate/route.ts` together; Router models can have different parameters and output shapes. Then update [`lib/flux-output.ts`](lib/flux-output.ts) to read that model's output schema. This example expects an HTTPS image URL at `result.sample`; a different output shape will fail with “No image URL was returned.”
 
 ## If a run fails
 
