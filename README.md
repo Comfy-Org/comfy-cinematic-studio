@@ -1,4 +1,6 @@
-# Cinematic Studio — Comfy Router guide
+# Cinematic Studio
+
+A standalone app for generating cinematic images with Comfy Router.
 
 ## Run locally
 
@@ -26,7 +28,7 @@ Keep `COMFY_API_KEY` in `.env.local`; only the server route reads it. Do not pre
 
 **Generate image** posts the scene and selected shot, camera, lighting, and look to `/api/generate`. The route validates these values, combines them into a prompt with `cinematicPrompt()` in `lib/prompt.ts`, and calls `bfl/flux-2-pro` through the Comfy SDK. The server fetches the result and returns the image to the browser.
 
-This example uses Comfy Router's hosted model API. It does not submit a Comfy workflow.
+This app uses Comfy Router's hosted model API. It does not submit a Comfy workflow.
 
 ## Make a change
 
@@ -42,4 +44,4 @@ Add the option to the corresponding list in `lib/prompt.ts` and add a matching `
 
 ## License
 
-This example is based on Comfy-Org's MIT-licensed [`img2img-web-app`](https://github.com/Comfy-Org/comfy-examples/tree/main/img2img-web-app). See [`LICENSE`](LICENSE).
+MIT. See [`LICENSE`](LICENSE).
