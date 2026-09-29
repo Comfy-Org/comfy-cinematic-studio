@@ -1,6 +1,6 @@
 # Cinematic Studio — Comfy Router guide
 
-Build a short scene from simple cinematography controls, then call an image model through Comfy Router. The app shows the exact prompt it sends.
+Create an image with shot, lens, lighting, and style controls. The app combines those choices with your scene description and sends the prompt to FLUX.2 Pro through Comfy Router.
 
 ## Run locally
 
@@ -20,7 +20,7 @@ Build a short scene from simple cinematography controls, then call an image mode
    npm run dev
    ```
 
-4. Open <http://localhost:3000>, describe a scene, pick the shot, camera, light and look, then select **Generate image**. Each run uses your workspace's Comfy credits at the current price for FLUX.2 Pro.
+4. Open <http://localhost:3000>, describe a scene, choose the shot, camera, light, and look, then select **Generate image**. Each run uses Comfy credits from the workspace that owns the API key.
 
 `COMFY_API_KEY` stays in the local server. Do not rename it with a `NEXT_PUBLIC_` prefix or commit `.env.local`.
 
@@ -28,12 +28,12 @@ Build a short scene from simple cinematography controls, then call an image mode
 
 - [`components/app-runner.tsx`](components/app-runner.tsx) collects the controls and posts them to `/api/generate`.
 - [`lib/prompt.ts`](lib/prompt.ts) combines the scene and direction choices into plain prompt text. Camera and lens names guide the image model through language; they do not simulate a real optical camera.
-- [`app/api/generate/route.ts`](app/api/generate/route.ts) validates the request, configures the official Comfy TypeScript SDK with the server key, and calls the `bfl/flux-2-pro` Router model. It streams the returned image back to the page.
-- Comfy Router calls a hosted model directly. This app does not submit a Comfy workflow graph. Re-shoot is the companion example that teaches workflow execution.
+- [`app/api/generate/route.ts`](app/api/generate/route.ts) validates the request, configures the Comfy TypeScript SDK with the server key, and calls the `bfl/flux-2-pro` Router model. It streams the returned image back to the page.
+- Router calls a hosted model directly; this app does not submit a Comfy workflow graph. See Re-shoot for workflow execution.
 
 ## Make a change
 
-Add one option to a list in `lib/prompt.ts` and to its control in `components/app-runner.tsx`. The page preview shows the new words before generation, so you can see the effect of your edit without guessing what request was sent.
+Add the option to the corresponding list in `lib/prompt.ts` and add a matching `<option>` in `components/app-runner.tsx`. The prompt preview and API route both call `cinematicPrompt()` from `lib/prompt.ts`.
 
 To try another Router model, first check its request fields in the [model catalog](https://docs.comfy.org/development/comfy-router/schemas). Change the model ID and request body in `app/api/generate/route.ts` together; Router models can have different parameters and output shapes. Then update [`lib/flux-output.ts`](lib/flux-output.ts) to read that model's output schema. This example expects an HTTPS image URL at `result.sample`; a different output shape will fail with “No image URL was returned.”
 
@@ -44,7 +44,7 @@ To try another Router model, first check its request fields in the [model catalo
 - **Request validation:** this example sends only `prompt`. If you add model parameters, compare them with that model's schema.
 - **Image unavailable:** Router returns provider output links. The server fetches the returned link and streams the bytes back to the browser; errors include the Comfy request ID when Router returned one.
 
-This sample starts one Router request per click. Router runs can take a little while; the status text stays visible while the server request is in progress. The page keeps the latest output in memory, so reload clears it.
+The page holds the latest image in memory. Reloading clears it.
 
 ## License
 
