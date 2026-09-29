@@ -1,10 +1,9 @@
 import { comfy } from "@comfyorg/sdk";
 import { NextResponse } from "next/server";
 import { cinematicPrompt, isDirection } from "../../../lib/prompt";
+import { fluxImageUrl } from "../../../lib/flux-output";
 
 export const runtime = "nodejs";
-
-type FluxOutput = { images?: Array<{ url?: string }> };
 
 export async function POST(request: Request) {
   let body: { scene?: unknown; direction?: unknown };
@@ -24,9 +23,9 @@ export async function POST(request: Request) {
   try {
     comfy.config({ credentials: apiKey });
     const prompt = cinematicPrompt(body.scene, body.direction);
-    const result = await comfy.models.run<FluxOutput>("bfl/flux-2-pro", { prompt });
+    const result = await comfy.models.run("bfl/flux-2-pro", { prompt });
     if (result.kind !== "json") throw new Error("The model returned an unexpected binary response.");
-    const url = result.data.images?.[0]?.url;
+    const url = fluxImageUrl(result.data);
     if (!url) throw new Error(`The model returned no image. Request ID: ${result.requestId}`);
 
     const image = await fetch(url);
