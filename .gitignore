@@ -1,0 +1,10 @@
+.env.local
+.DS_Store
+node_modules
+.next
+dist
+outputs
+*.tsbuildinfo
+AGENTS.md
+CLAUDE.md
+higgsfield-apps-reference.png

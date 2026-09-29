@@ -1,0 +1,26 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #101114; color: #f5f5f5; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.shell { width: min(1120px, calc(100% - 32px)); margin: auto; padding: 32px 0 64px; }
+header { margin: 30px 0; }
+.eyebrow, .small { color: #aaa; font: 12px ui-monospace, monospace; letter-spacing: .07em; }
+h1 { margin: 12px 0; font-size: clamp(52px, 9vw, 96px); line-height: .9; letter-spacing: -.065em; }
+.lede { max-width: 650px; color: #bbb; line-height: 1.6; }
+.workspace { display: grid; grid-template-columns: 360px 1fr; min-height: 540px; border: 1px solid #35363d; border-radius: 16px; background: #191a1f; overflow: hidden; }
+.controls { display: grid; align-content: start; gap: 15px; padding: 20px; border-right: 1px solid #35363d; }
+.field { display: grid; gap: 7px; color: #d4d4d8; font-size: 13px; }
+textarea, select { width: 100%; padding: 10px; border: 1px solid #44464e; border-radius: 8px; background: #111216; color: #f5f5f5; font: inherit; }
+textarea { min-height: 105px; resize: vertical; }
+button { padding: 12px; border: 0; border-radius: 8px; background: #c2a5ff; color: #17121f; cursor: pointer; font: inherit; font-weight: 700; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.status { min-height: 2.5em; margin: 0; color: #bbb; font-size: 13px; line-height: 1.5; }
+.status.error { color: #ffaaaa; }
+.output { display: grid; align-content: center; justify-items: center; min-width: 0; gap: 12px; padding: 20px; background: #111216; }
+.output > p { color: #999; }
+.output img { display: block; max-width: 100%; max-height: 700px; object-fit: contain; }
+.output a { color: #c2a5ff; }
+.prompt { margin-top: 18px; padding: 15px; border: 1px solid #35363d; border-radius: 10px; background: #191a1f; }
+.prompt summary { cursor: pointer; color: #d8cdf3; }
+.prompt p { color: #bbb; line-height: 1.6; }
+.small { letter-spacing: 0; line-height: 1.5; }
+@media (max-width: 760px) { .workspace { grid-template-columns: 1fr; } .controls { border-right: 0; border-bottom: 1px solid #35363d; } }
