@@ -4,7 +4,7 @@ A standalone app for generating cinematic images with Comfy Router.
 
 ## Run locally
 
-1. Install [Node.js 22.6 or newer](https://nodejs.org/) and create a [Comfy API key](https://docs.comfy.org/development/comfy-router/quickstart) for a workspace with Router access and credits.
+1. Install [Node.js 22.6 or newer](https://nodejs.org/) and create a [Comfy API key](https://platform.comfy.org/profile/api-keys?onboarding=router) for a workspace with Router access and credits.
 2. Clone and configure the app:
 
    ```sh
